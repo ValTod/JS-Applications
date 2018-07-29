@@ -11,25 +11,25 @@ function attachEvents() {
 
     function add() {
         let angler = $('#addForm').find('.angler').val();
-        let weight = $('#addForm').find('.weight').val();
+        let weight = Number($('#addForm').find('.weight').val());
         let species = $('#addForm').find('.species').val();
         let location = $('#addForm').find('.location').val();
         let bait = $('#addForm').find('.bait').val();
-        let captureTime = $('#addForm').find('.captureTime').val();
+        let captureTime = Number($('#addForm').find('.captureTime').val());
 
         $.ajax({
             method: 'POST',
             url: URL,
             headers: {'Authorization': 'Basic ' + BASE_64,
                 'contentType': 'application/json'},
-            data: {
+            data: JSON.stringify({
                 "angler": angler,
                 "weight": weight,
                 "species": species,
                 "location": location,
                 "bait": bait,
                 "captureTime": captureTime
-            }
+            })
         }).then(load)
             .catch(handleError);
 
@@ -90,25 +90,25 @@ function attachEvents() {
         //console.log(aaa);
         let angler = $(aaa).find('.angler').val();
         //console.log(angler);
-        let weight = $(aaa).find('.weight').val();
+        let weight = Number($(aaa).find('.weight').val());
         let species = $(aaa).find('.species').val();
         let location = $(aaa).find('.location').val();
         let bait = $(aaa).find('.bait').val();
-        let captureTime = $(aaa).find('.captureTime').val();
+        let captureTime = Number($(aaa).find('.captureTime').val());
 
         $.ajax({
             method: 'PUT',
             url: URL + aaa.attr('data-id'),
             headers: {'Authorization': 'Basic ' + BASE_64,
                 'contentType': 'application/json'},
-            data: {
+            data: JSON.stringify({
                 "angler": angler,
                 "weight": weight,
                 "species": species,
                 "location": location,
                 "bait": bait,
                 "captureTime": captureTime
-            }
+            })
         }).then(load)
             .catch(handleError)
     }
